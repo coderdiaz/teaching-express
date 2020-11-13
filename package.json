@@ -1,0 +1,14 @@
+{
+    "name": "express-demo",
+    "version": "0.0.0",
+    "scripts": {
+        "dev": "nodemon src/app.js"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "mongoose": "^5.10.13"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.6"
+    }
+}
