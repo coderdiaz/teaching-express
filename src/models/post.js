@@ -8,15 +8,15 @@ const PostSchema = new mongoose.Schema({
         type: String,
     },
     category: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
     },
     author: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Author',
     },
     comments: {
-        type: [Schema.Types.ObjectId],
+        type: [mongoose.Schema.Types.ObjectId],
         ref: 'Comment',
     },
     publishedAt: {

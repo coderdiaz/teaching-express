@@ -5,5 +5,6 @@ const router = express.Router();
 router.use('/categories', require('./categories'));
 router.use('/authors', require('./authors'));
 router.use('/comments', require('./comments'));
+router.use('/posts', require('./posts'));
 
 module.exports = router;
