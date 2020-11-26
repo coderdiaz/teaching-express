@@ -1,9 +1,28 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const helmet = require('helmet');
+const cors = require('cors');
 const app = express(); // Creating an Express application
 
 // A port where our application will be mounted
 const APP_PORT = 4001;
+
+// Example: Global middleware
+// app.use((req, res, next) => {
+//     console.log('Estoy dentro del middleware');
+//     next();
+// });
+
+// Example: Single middleware
+// const exampleMiddleware = (req, res, next) => {
+//     next();
+// }
+// app.get('/protectedRoute', exampleMiddleware, (req, res) => {
+//     return res.json();
+// });
+
+app.use(helmet()); // Basic configuration for helmet
+app.use(cors()); // Basic configuration for enable CORS
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
