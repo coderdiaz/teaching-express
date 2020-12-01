@@ -9,7 +9,8 @@ const authentication = (req, res, next) => {
     const user = await User.findOne({ email: decoded.email }).exec();
     req.user = {
       id: user._id,
-      email: user.email
+      email: user.email,
+      type: user.type,
     };
 
     next();

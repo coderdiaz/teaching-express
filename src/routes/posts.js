@@ -3,9 +3,11 @@ const router = express.Router();
 const { Post } = require('../models/post');
 const mongoose = require('mongoose');
 
+const permission = require('../middlewares/permissions');
+
 // Posts Methods
 // GET /
-router.get('/', async (req, res) => {
+router.get('/', permission('admin', 'author', 'reader'), async (req, res) => {
     const posts = await Post
         .find()
         .populate(['category', 'author', 'comments'])
@@ -18,7 +20,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /
-router.post('/', async (req, res) => {
+router.post('/', permission('admin', 'author'), async (req, res) => {
     const {
         title,
         content,

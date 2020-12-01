@@ -3,9 +3,11 @@ const router = express.Router();
 const { Author } = require('../models/author');
 const mongoose = require('mongoose');
 
+const permission = require('../middlewares/permissions');
+
 // Authors Methods
 // GET /
-router.get('/', async (req, res) => {
+router.get('/', permission('admin', 'author', 'reader'), async (req, res) => {
     const authors = await Author.find().exec();
     return res.status(200).json({
         status: 200,
@@ -14,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /
-router.post('/', async (req, res) => {
+router.post('/', permission('admin'), async (req, res) => {
     const { name, lastname, avatar } = req.body;
     // TODO: Add fields validations
     const newAuthor = new Author({
@@ -31,8 +33,12 @@ router.post('/', async (req, res) => {
 });
 
 // PUT /:id/
-router.put('/:id', async (req, res) => {
+router.put('/:id', permission('admin', 'author'), async (req, res) => {
     const { id } = req.params;
+
+    // TODO: Validate if the author is the same
+    // if not Forbidden
+
     const { name, lastname, avatar } = req.body;
     // TODO: Add fields validations
 
@@ -65,8 +71,11 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE /:id
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', permission('admin', 'author'), async (req, res) => {
     const { id } = req.params;
+
+    // TODO: Validate if the author is the same
+    // if not Forbidden
   
     // Validate if `id` is an ObjectId
     if (!mongoose.Types.ObjectId.isValid(id)) {
