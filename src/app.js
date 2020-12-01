@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -5,7 +6,7 @@ const cors = require('cors');
 const app = express(); // Creating an Express application
 
 // A port where our application will be mounted
-const APP_PORT = 4001;
+const APP_PORT = process.env.PORT;
 
 // Example: Global middleware
 // app.use((req, res, next) => {
@@ -38,7 +39,7 @@ app.get('/', (req, res) => {
 app.use('/api', require('./routes'));
 
 // mongodb://<host>:<port>@<user>:<password>/<database>
-mongoose.connect('mongodb://localhost/blog', {
+mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {

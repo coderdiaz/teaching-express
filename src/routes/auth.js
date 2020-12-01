@@ -28,8 +28,8 @@ router.post('/login', async (req, res) => {
     }
 
     // Generating token
-    const token = jwt.sign({ email: user.email }, 'secret-key', {
-      expiresIn: 3600000,
+    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
+      expiresIn: process.env.JWT_EXPIRESIN,
     });
 
     // Returning access token
